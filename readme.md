@@ -1,49 +1,48 @@
-# Desafío Latam / Bootcamp Front-end
-## Semana 9 - Actividad presencial 1.
+# Base para trabajar con SASS, ES6 y mucho más. 
+[Laravel Mix](https://github.com/JeffreyWay/laravel-mix) nos permite trabajar con estás tecnologías y muchas más de manera simple y prácticamente sin configuración.
 
-##### El objetivo de esta actividad es la creación de un landing que permita seleccionar distintas ubicaciones. Por cada ubicación seleccionada debe conectarse con:
-- La [API de Google Maps](https://developers.google.com/maps/documentation/javascript/tutorial?hl=es) para desplegar un mapa que muestre la ubicación seleccionada.
-- La [API de DarkSky](https://darksky.net/dev/) para obtener un resumen del clima de la ubicación.
+### Requisitos
+Para trabajar con laravel mix, es necesario tener instalado [Node.js y NPM](https://nodejs.org/en/)
+Puedes verificar si tienes instalado npm ejecutando este comando: 
+```bash
+npm -v
+```
+Lo que debiese retorar algo como `6.1.0`
 
-#### Actividad:
+## Instalación
+Bajar el repositorio e instalar laravel mix usando npm 
+```bash
+git clone https://github.com/freshworkstudio/laravel-mix-base.git mi-proyecto
+cd mi-proyecto
+npm install
+```
+Eso es todo. De ahora en adelante, ya puedes compilar tus assets. 
+Recuerda que `npm install` puede demorar bastante en terminar y arrojar algunas advertencias. Es normal, no te preocupes.
 
-- Registrarse en el sitio web de la [API de Google](https://developers.google.com/maps/documentation/javascript/tutorial?hl=es) para obtener una API Key.
+Luego, solo debes ejecutar este comando para compilar
+```bash
+npm run dev
+```
 
-- Registrarse en el sitio web de la [API de DarkSky](https://darksky.net/dev/) para obtener una API Key.
+### Watch (compilar automáticamente al guardar)
+Para que laravel mix compile automáticamente cuando realizas un cambio en el SASS, puedes correr este comando: 
+```bash
+npm run watch
+```
 
-- Crear una carpeta para el proyecto. Dentro de la carpeta crear el archivo index.html y app.js
+#### Estructura
+Si te fijas, el archivo index.html está dentro de la carpeta `/public`. Te recomiendo que sigas esta misma estructura y pongas todos los HTML en esta carpeta. En cambio, todos los archivos fuentes (SASS, Javascript, etc) los coloques fuera de esta carpeta, en este caso dentro de `/src`
 
-- Abrir el archivo index.html, crear la estructura básica HTML, integrar jQuery mediante CDN e integrar el archivo app.js
+En el archivo `webpack.mix.js` está la configuración que le indica a Laravel mix que compilar y en donde. 
 
-- Consultar la documentación de ambas API para su implementación.
+#### Recomenmdación GIT
+Para usar esta carpeta como un nuevo repositorio, diferente a esta base, te recomiendo realizar este proceso: 
+```bash
+rm -fr .git
+git init
+```
+De esta forma, eliminamos la información del repositorio que clonamos y creamos un nuevo repositorio donde puedes comenzar a trabajar desde cero con tus propios commits. 
 
-- El mapa de Google debe estar posicionado a la izquierda ocupando un 50% del ancho y un 100% de la altura del [viewport](https://web-design-weekly.com/2014/11/18/viewport-units-vw-vh-vmin-vmax/).
 
-- A la derecha se debe implementar un Select que permita distintas ubicaciones del país. Las coordenadas de cada ubicación deben estar almacenadas en un objeto literal en el archivo app.js
 
-- Al seleccionar una ubicación:
-
-  - Mostrar el mapa centrado en la ubicación seleccionada con un marcador. Al seleccionar una nueva ubicación, el mapa debe ser re-centrado y se debe mostrar un nuevo marcador.(Hint: utilizar método [map.setCenter()](https://www.w3schools.com/graphics/google_maps_events.asp))
-
-  - Consultar la API de DarkSky para obtener un resumen del clima de la ubicación seleccionada.
-
-    ![alt text](ss_1.png)
-
-##### Observaciones generales:
-
-  - Al instanciar un nuevo mapa, la propiedad 'center' recibe como argumento un objeto literal que debe tener la siguiente estructura (la misma para el método setCenter()):
-
-    ~~~js
-    santiago_coords: {
- 		lat: -33.4488897,
- 		lng: -70.6692655
- 	  };
-    ~~~
-
-  - Los métodos de Google Map manejan las ubicaciones como un objeto literal, sin embargo, la API de DarkSky recibe los parámetros en la url como string.
-
-  - En caso de obtener error __No 'Access-Control-Allow-Origin' header is present on the requested resource.__ En el llamado a la API de DarkSky, se debe anteponer un proxy a la url, por ejemplo:
-
-  ~~~
-  https://crossorigin.me/https://api.darksky.net/forecast/....
-  ~~~
+# api-clima
